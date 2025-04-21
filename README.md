@@ -1,6 +1,6 @@
 # 🚋 Smart Depo Project
 
-![.NET](https://img.shields.io/badge/.NET-6.0-blue)
+![.NET](https://img.shields.io/badge/.NET-8.0-blue)
 ![Blazor](https://img.shields.io/badge/Blazor-WebAssembly-purple)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
