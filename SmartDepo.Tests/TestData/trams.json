@@ -1,0 +1,7 @@
+[
+    { "Id": 1, "Name": "Tram-1", "CurrentMission": "Mission-Alpha" },
+    { "Id": 2, "Name": "Tram-2", "CurrentMission": null },
+    { "Id": 3, "Name": "Tram-3", "CurrentMission": "Mission-Beta" },
+    { "Id": 4, "Name": "Tram-4", "CurrentMission": null },
+    { "Id": 5, "Name": "Tram-5", "CurrentMission": "Mission-Gamma" }
+]

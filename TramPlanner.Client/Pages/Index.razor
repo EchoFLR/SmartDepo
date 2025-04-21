@@ -1,0 +1,142 @@
+@page "/"
+@using TramPlanner.Client.Services
+@using SmartDepoLib 
+
+@inject TramService TramService
+
+<h3>Tram Planner</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (trams != null && trams.Any())
+{
+    <h4>Tram Data</h4>
+    <ul style="text-align: left; list-style-position: inside;">
+        @foreach (var tram in trams)
+        {
+            <li>
+                <strong>@tram.Name</strong> (ID: @tram.Id) - Mission: @(tram.CurrentMission ?? "None")
+            </li>
+        }
+    </ul>
+    <div style="margin-top: 20px;">
+        <textarea @bind="newMission" placeholder="Enter mission here..." style="width: 100%; height: 80px; resize: none;"></textarea>
+        <br />
+        <button @onclick="AssignMission" style="margin-top: 10px;">Assign Mission</button>
+        <button @onclick="ResetData" style="margin-top: 10px; margin-left: 10px;">Reset Data</button>
+    </div>
+}
+else
+{
+    <p>No tram data available. Please initialize the depot.</p>
+    <textarea @bind="tramData" placeholder="Paste tram data here..." style="width: 100%; height: 150px; resize: none;"></textarea>
+    <br />
+    <button @onclick="Start" style="margin-top: 10px;">Start</button>
+}
+
+@code {
+    private string tramData = string.Empty;
+    private bool isLoading = false;
+    private List<Tram>? trams;
+    private string newMission = string.Empty; // Temporary variable for the new mission
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            isLoading = true;
+
+            // Fetch existing tram data from the backend
+            trams = (await TramService.GetTramsAsync())?.ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching tram data: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task Start()
+    {
+        try
+        {
+            isLoading = true;
+
+            // Send initial tram data to the backend
+            var message = await TramService.InitializeDepoAsync(tramData);
+            Console.WriteLine(message);
+
+            // Fetch tram data from the backend
+            trams = (await TramService.GetTramsAsync())?.ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task AssignMission()
+    {
+        try
+        {
+            isLoading = true;
+
+            // Call the backend to assign the mission
+            if (!string.IsNullOrWhiteSpace(newMission))
+            {
+                var statusCode = await TramService.AssignMissionAsync(newMission);
+                Console.WriteLine($"Mission assigned with status: {statusCode}");
+
+                // Refresh tram data
+                trams = (await TramService.GetTramsAsync())?.ToList();
+
+                // Clear the mission input field
+                newMission = string.Empty;
+            }
+            else
+            {
+                Console.WriteLine("Mission input is empty or invalid.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error assigning mission: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task ResetData()
+    {
+        try
+        {
+            isLoading = true;
+
+            // Call the backend to reset the tram data
+            var statusCode = await TramService.ResetDataAsync();
+            Console.WriteLine($"Data reset with status: {statusCode}");
+
+            // Refresh tram data
+            trams = (await TramService.GetTramsAsync())?.ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error resetting data: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}

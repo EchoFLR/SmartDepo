@@ -1,0 +1,91 @@
+/* Skoda-like colors */
+:root {
+    --skoda-green: #00794c;
+    --skoda-white: #ffffff;
+    --skoda-black: #000000;
+}
+
+/* General body styling */
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--skoda-green); /* Skoda green background */
+    color: var(--skoda-white); /* White text */
+}
+
+/* Main layout styling */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Content styling */
+.content {
+    width: 90%;
+    min-width: 1000px;
+    min-height: 600;
+    padding: 20px;
+    background-color: var(--skoda-black); /* Black content background */
+    color: var(--skoda-white); /* White text */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    text-align: center;
+}
+
+/* Button styling */
+button {
+    background-color: var(--skoda-green);
+    color: var(--skoda-white);
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #005f3a; /* Darker green on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+button:active {
+    background-color: #004d2e; /* Even darker green on click */
+    transform: scale(0.95); /* Slight shrink effect */
+}
+
+/* Textarea styling */
+textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 150px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border: 2px solid #00794c; /* Skoda green border */
+    border-radius: 10px;
+    background-color: #2b2b2b; /* Slightly lighter dark background */
+    color: #e0e0e0; /* Softer white text */
+    outline: none;
+    resize: vertical; /* Allow vertical resizing only */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #00a65a; /* Brighter green on focus */
+    box-shadow: 0 0 10px rgba(0, 166, 90, 0.6); /* Green glow */
+}
+
+textarea::placeholder {
+    color: #b0b0b0; /* Softer gray placeholder text */
+    font-style: italic;
+    font-size: 14px;
+}

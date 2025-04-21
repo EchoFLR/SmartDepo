@@ -1,0 +1,6 @@
+@TramPlanner.Server_HostAddress = http://localhost:5076
+
+GET {{TramPlanner.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
