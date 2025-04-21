@@ -70,20 +70,25 @@ The frontend communicates with the backend via RESTful APIs and dynamically upda
    dotnet run
 ```   
    The backend will start at http://localhost:5076 (or the configured port).
+
 3. **Start the Frontend**:
 ```bash
    cd ../TramPlanner.Server
    dotnet run
 ```
    The frontend will start and can be accessed in your browser.
+
 4. **Initialize the Depot**:
    Paste tram data in JSON format into the provided textarea in the frontend.
    Click the "Start" button to initialize the depot.
+
 5. **Assign a Mission**:
    Enter a mission in the text input field and click "Assign Mission."
    The mission will be assigned to a tram, and the tram data will update dynamically.
+
 6. **Reset the Depot**:
    Click the "Reset Data" button to clear all trams and reinitialize the depot.
+
 
 ## 📝 Example JSON for Initialization
 ```json
